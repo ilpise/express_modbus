@@ -9,6 +9,7 @@ var usersRouter = require('./routes/users');
 
 var statusRouter = require('./routes/status');
 var resetZeroRouter = require('./routes/resetzero');
+var setTaraRouter = require('./routes/settara');
 var readWeightRouter = require('./routes/readweight');
 
 var app = express();
@@ -29,6 +30,7 @@ app.use('/users', usersRouter);
 // mount the router on the app
 app.use('/getDatsStatus', statusRouter );
 app.use('/resetZeroDats', resetZeroRouter );
+app.use('/setTaraDats', setTaraRouter );
 app.use('/readWeightDats', readWeightRouter );
 
 // catch 404 and forward to error handler
