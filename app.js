@@ -12,6 +12,8 @@ var resetZeroRouter = require('./routes/resetzero');
 var setTaraRouter = require('./routes/settara');
 var readWeightRouter = require('./routes/readweight');
 
+// var Modbusclient = reqire('./mbcli.js'); // TODO export default client ...
+
 var app = express();
 
 // view engine setup

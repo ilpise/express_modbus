@@ -74,6 +74,14 @@ router.use('/', function(req, res, next) {
         _thisclient.writeSingleRegister(502, Buffer.from([0x00, 0x02])).then(function (resp) {
           console.log('###### Response from set tara');
           console.log(resp)
+
+          // Response
+          // { fc: 6,
+          // registerAddress: 502,
+          // registerValue: 2,
+          // registerAddressRaw: <Buffer 01 f6>,
+          // registerValueRaw: <Buffer 00 02> }
+
           clearInterval(check);
           // res.json(resp);
           next('route')
@@ -110,6 +118,13 @@ router.get('/', function(req, res, next) {
         _thisclient.readHoldingRegisters(1, 4).then(function (resp) {
           console.log('###### Response');
           console.log(resp)
+
+          // Response
+          // { fc: 3,
+          //   byteCount: 8,
+          //   payload: <Buffer 00 00 00 24 00 00 00 00>,
+          //   register: [ 0, 36, 0, 0 ] }
+
           clearInterval(check);
           res.json(resp);
         }).catch(function (err) {

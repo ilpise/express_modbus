@@ -63,6 +63,7 @@ router.use(function (req, res, next) {
 /* Taratura di zero peso. */
 router.use('/', function(req, res, next) {
   console.log('----- Taratura di zero peso. ');
+
   var counter = 5;
   var check = setInterval(function(){
     console.log(counter);
@@ -74,6 +75,14 @@ router.use('/', function(req, res, next) {
         _thisclient.writeSingleRegister(502, Buffer.from([0x00, 0x10])).then(function (resp) {
           console.log('###### Response from write');
           console.log(resp)
+
+          // Response
+          // { fc: 6,
+          // registerAddress: 502,
+          // registerValue: 16,
+          // registerAddressRaw: <Buffer 01 f6>,
+          // registerValueRaw: <Buffer 00 10> }
+
           clearInterval(check);
           // res.json(resp);
           next('route')
@@ -111,6 +120,14 @@ router.use('/', function(req, res, next) {
         _thisclient.readHoldingRegisters(0, 1).then(function (resp) {
           console.log('###### Response');
           console.log(resp)
+
+          // Response
+          // { fc: 3,
+          //   byteCount: 2,
+          //   payload: <Buffer 02 07>,
+          //   register: [ 519 ] }
+
+
           clearInterval(check);
           //res.json(resp);
           next('route')
@@ -152,6 +169,14 @@ router.get('/', function(req, res, next) {
         _thisclient.writeSingleRegister(502, Buffer.from([0x00, 0x20])).then(function (resp) {
           console.log('###### Response');
           console.log(resp)
+
+          // Response
+          // { fc: 6,
+          //   registerAddress: 502,
+          //   registerValue: 32,
+          //   registerAddressRaw: <Buffer 01 f6>,
+          //   registerValueRaw: <Buffer 00 20> }
+
           clearInterval(check);
           res.json(resp);
           //next('route')

@@ -63,6 +63,10 @@ router.use(function (req, res, next) {
 /* GET DATS status. */
 router.get('/', function(req, res, next) {
   console.log('----- Req ');
+
+  // Response
+  // {"fc":3,"byteCount":2,"payload":{"type":"Buffer","data":[0,14]},"register":[14]}
+
   var counter = 5;
   var check = setInterval(function(){
     console.log(counter);
@@ -75,12 +79,11 @@ router.get('/', function(req, res, next) {
           console.log(resp)
           clearInterval(check);
           res.json(resp);
-          // next('route')
         }).catch(function (err) {
           console.log('##### Error')
           console.log(err)
           // { err: 'modbus client not in "ready" state' }
-          clearInterval(check);          
+          clearInterval(check);
           _thisclient.close()
           next(err)
         }).done(function () {
@@ -92,11 +95,6 @@ router.get('/', function(req, res, next) {
       if (_thisclient && _thisclient.inState('closed')) {
         _thisclient.connect();
       }
-      //  else {
-      //   res.json({"mbc": "noclient"});
-      // }
-
-    // }
   }, 1000);
 
 });
