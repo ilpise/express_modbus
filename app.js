@@ -4,15 +4,15 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+global.mbcli = require('./mbcli.js'); // Use one global modbusclient
+
+// var indexRouter = require('./routes/index');
+// var usersRouter = require('./routes/users');
 
 var statusRouter = require('./routes/status');
 var resetZeroRouter = require('./routes/resetzero');
 var setTaraRouter = require('./routes/settara');
 var readWeightRouter = require('./routes/readweight');
-
-// var Modbusclient = reqire('./mbcli.js'); // TODO export default client ...
 
 var app = express();
 
@@ -26,8 +26,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+// app.use('/', indexRouter);
+// app.use('/users', usersRouter);
 
 // mount the router on the app
 app.use('/getDatsStatus', statusRouter );

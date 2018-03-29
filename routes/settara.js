@@ -1,68 +1,25 @@
 var express = require('express');
 var router = express.Router();
-var modbus = require('jsmodbus');
-var node_modbus = require('node-modbus');
-
-// create a modbus client
-console.log("------- CREATE MODBUS CLIENT -------");
-var client = node_modbus.client.tcp.complete({
-        'host'              : '192.168.1.77',
-        'port'              : 502,
-        'autoReconnect'     : false,
-        // 'autoReconnect'     : true,
-        // 'reconnectTimeout'  : 1000,
-        'timeout'           : 5000,
-        'unitId'            : 1,
-        'logEnabled': true,
-        'logLevel': 'debug'
-    });
-
-
-
-client.on('error', function (err) {
-  console.log('##### Client error');
-  console.log(err)
-})
-
-client.on('close', function () {
-  console.log('##### Client closed')
-})
-
-client.on('connect', function () {
-  console.log('##### Connected')
-  // return true;
-  // client.readHoldingRegisters(0, 1).then(function (resp) {
-  //   console.log('###### Response');
-  //   console.log(resp)
-  //
-  //   // next('route')
-  // }).catch(function (err) {
-  //   console.log('##### Error')
-  //   console.log(err)
-  //   // next(err)
-  // }).done(function () {
-  //   console.log('###### Done');
-  //   client.close()
-  // })
-})
 
 var _thisclient = null;
 // a middleware function with no mount path. This code is executed for every request to the router
 router.use(function (req, res, next) {
   console.log(' ----------- - Time:', Date.now())
-  console.log(client.getState());
-  if(client.getState() != 'ready') { // Call connect if we are not connected
+  console.log(mbcli.getState());
+  if(mbcli.getState() != 'ready') { // Call connect if we are not connected
     console.log("##### Calling connect");
-    _thisclient = client.connect();
+    _thisclient = mbcli.connect();
     console.log('_thisclient');
     // console.log(_thisclient);
+  } else {
+    _thisclient = mbcli;
   }
   next();
 })
 
-/* Taratura di zero peso. */
+/* Autotara. */
 router.use('/', function(req, res, next) {
-  console.log('----- Taratura di zero peso. ');
+  console.log('----- Autotara. ');
   var counter = 5;
   var check = setInterval(function(){
     console.log(counter);
