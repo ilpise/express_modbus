@@ -14,13 +14,14 @@ global.mbcli = require('./mbcli.js'); // Use one global modbusclient
 var app = express();
 
 var Modbusclient = require('./mbcli.js'); // TODO export default client ...
-var mock = false
 
-if (mock === true) {
-  var statusRouter = require('./mock/status');
-  var resetZeroRouter = require('./mock/resetzero');
-  var setTaraRouter = require('./mock/settara');
-  var readWeightRouter = require('./mock/readweight');
+var mock = true
+
+if (mock === false) {
+  var statusRouter = require('./routes/mock/status');
+  var resetZeroRouter = require('./routes/mock/resetzero');
+  var setTaraRouter = require('./routes/mock/settara');
+  var readWeightRouter = require('./routes/mock/readweight');
 } else {
   var statusRouter = require('./routes/status');
   var resetZeroRouter = require('./routes/resetzero');
