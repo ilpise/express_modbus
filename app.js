@@ -13,7 +13,7 @@ global.mbcli = require('./mbcli.js'); // Use one global modbusclient
 
 var app = express();
 
-var Modbusclient = reqire('./mbcli.js'); // TODO export default client ...
+var Modbusclient = require('./mbcli.js'); // TODO export default client ...
 var mock = false
 
 if (mock === true) {
